@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="css/loginForm.css" />
 <script>
 	const showPopup = () => {
-		window.open("/joinForm","joinForm","width=400, height=300, left=100, top=50");
+		window.open("/joinForm","joinForm","width=600, height=800, left=400, top=50");
 	}
 </script>
 </html>
