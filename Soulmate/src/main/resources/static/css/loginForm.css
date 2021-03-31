@@ -1,0 +1,39 @@
+@charset "UTF-8";
+*{
+	padding: 0;
+	margin: 0;
+	font-family: 'Noto Sans KR' ;
+	color: #121212;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+.container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	height: 1000px;
+}
+#login{
+	text-align: center;
+}
+#login a:first-child{
+	font-size: 2rem;
+	font-weight: 900;
+	color: #37dcd6;
+}
+#login small{
+	color: #37dcd6;
+	display: inline-block;
+	font-weight: 900;
+	margin-bottom: 30px;
+}
+#login input{
+	padding: 5px;
+	margin: 3px;
+	outline: none;
+	border-radius: 14px;
+	border: 1px solid #37dcd6;
+}

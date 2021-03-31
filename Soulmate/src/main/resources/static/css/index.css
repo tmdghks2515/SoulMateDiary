@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+.slider{
+	height: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #e8e8e8;
+	width: 100%;
+}
