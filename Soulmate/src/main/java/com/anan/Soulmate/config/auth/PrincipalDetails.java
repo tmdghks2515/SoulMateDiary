@@ -2,21 +2,45 @@ package com.anan.Soulmate.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import com.anan.Soulmate.model.Soulmate;
 import com.anan.Soulmate.model.User;
+import com.anan.Soulmate.repository.SoulmateRepository;
 
-public class PrincipalDetails implements UserDetails{
+import lombok.RequiredArgsConstructor;
+
+public class PrincipalDetails implements UserDetails, OAuth2User{
 
 	private User user;
-	
+	private Soulmate soulmate;
+	private Map<String, Object> attributes;
 	
 	public PrincipalDetails(User user) {
 		this.user = user;
+		if(this.user == null)
+			this.user = new User();
+	}
+	
+	public PrincipalDetails(User user, Map<String, Object> attributes) {
+		this.user = user;
+		if(this.user == null)
+			this.user = new User();
+		this.attributes = attributes;
 	}
 
+	public User getUser() {
+		return user;
+	}
+	public Soulmate getSoulmate() {
+		return soulmate;
+	}
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collect = new ArrayList<>();
@@ -39,6 +63,7 @@ public class PrincipalDetails implements UserDetails{
 		return user.getUsername();
 	}
 
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -58,5 +83,16 @@ public class PrincipalDetails implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 }
+
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

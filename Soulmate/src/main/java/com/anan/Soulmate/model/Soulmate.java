@@ -1,42 +1,39 @@
 package com.anan.Soulmate.model;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class User {
+@NoArgsConstructor
+public class Soulmate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
-	private String username;
-	private String password;
-	private String name;
-	private String email;
-	private String Role;
-	@JoinColumn
-	@CreationTimestamp
-	private Timestamp createDate;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId1")
+	private User user1;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId2")
+	private User user2;
+	
+	@Temporal(TemporalType.DATE)
+	private Date Ddate;
 }

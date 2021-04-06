@@ -12,7 +12,7 @@
 		<div class="slider">
 			<span>슬라이더</span>
 		</div>
-		<a href="/loginForm">로그인 하러가기</a>
+		<a href="/user/diaryMain">마이 페이지</a>
 	</div>
 </body>
 <link rel="stylesheet" href="css/index.css" />

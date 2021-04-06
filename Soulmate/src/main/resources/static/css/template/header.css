@@ -8,16 +8,30 @@
 header{
 	text-align: center;
 	padding: 1em 0;
-	background-color:#37dcd6; 
+	background-color:#519D9E;
+	position: relative; 
 }
 a{
 	text-decoration: none;
 	color: black;
 }
-header a{
+header>a{
 	font-weight: 700;
 	font-size: 1.5rem;
 	font-family: 'CookieRun';
 	color: white;
 	text-shadow: 3px 3px 5px rgba(50,50,50,0.5);
+}
+header div{
+	display: inline-block;
+	position: absolute;
+	right: 20px;
+	font-weight: 600;
+	color: white;
+}
+header div a{
+	font-weight: 600;
+	color: white;
+	display: inline-block;
+	margin-top: 4px;
 }

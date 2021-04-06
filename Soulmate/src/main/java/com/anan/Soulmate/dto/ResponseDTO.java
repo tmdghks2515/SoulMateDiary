@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseDTO<T> {
-	private int respondeCode;
+	private int responseCode;
 	private T responseMessage;
 }

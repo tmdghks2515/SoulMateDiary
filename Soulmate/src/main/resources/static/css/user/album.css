@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+section{
+	background-color: #e8e8e8;
+}
+.hidden{
+	display: none;
+}
+#addCard{
+	height: 16em;
+	padding:1em;
+}
+.btn{
+	color: white;
+	background-color: #816bfe;
+	padding: 0.6em;
+	border-radius: 5px;
+}
+form{
+	padding:10px;
+	float:left;
+	position: relative;
+	border: 2px solid #d8d8d8;
+	display: flex;
+	margin: 0 10px;
+}
+form a{
+	font-size: 12px;
+}
+form button{
+	padding: 0px 5px;	
+}
+form input{
+	padding:3px;
+}
+#btnAddCard{
+	float:left;
+}
+#btnShowSearch{
+	float: left;
+	margin: 0 10px;
+}
+p{
+	padding: 3px;
+}
+.card{
+	display: inline-block;
+	margin: 10px;
+	border: 2px solid gray;
+	box-shadow: 3px 3px 20px gray;
+	transition: all 0.2s;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.card:hover{
+	box-shadow: 3px 3px 20px black;
+}
+.card div:first-child{
+	background-color: rgba(100,100,100,0.2);
+}
+.card div:nth-child(2){
+	padding: 10px;
+	text-align: center;
+}
+.card img{
+	max-height: 250px;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/*************************/
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #519D9E; 
+  color: white;
+  text-align: center;
+}
+.modal-header h2{color: white}
+
+.modal-body {padding: 2px 16px;}
+
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+/***************************/
+.modal-body img{
+	height: 450px;
+	margin: 30px;
+}
+.modal-body div:first-child{
+	text-align: center;
+}
+.modal-body div:nth-child(2) {
+	padding: 40px 400px;
+}
+form div:last-child{
+	padding: 10px;
+}
+.sub{
+	color: #a8a8a8;
+	font-weight: 700;
+	display: inline-block;
+	margin: 15px 0;
+}
+#viewMore{
+	text-align: center;
+	width: 10em;
+	padding: 10px;
+	margin: 20px auto;
+	background-color: #418d8d;
+	border-radius: 10px;
+}
+#viewMore a{
+	color: white;
+}
+.sub2{
+	font-weight: 700;
+	color: #666666;
+}
+#addCard table td{
+	padding: 5px;
+}
+.top{
+	vertical-align: top;
+}
+#addCard table input{
+	border-radius: 50px;
+	border: none;
+	outline: none;
+	padding: 0.5em;
+}
+#addCard textarea {
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	resize: none;
+	padding: 1em;
+}
+.right{
+	text-align: right;
+}
+#frmSearch{
+	border: none;
+	background-color: white;
+	padding-left: 10px;
+	font-size: 20px;
+	padding-top: 12px;
+	border-radius: 100px;
+	width:300px;
+	color: black;
+}
+#frmSearch input{
+	border: none;
+	outline: none;
+	margin-left: 10px;
+	width: 80%;
+}

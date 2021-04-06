@@ -5,12 +5,13 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.anan.Soulmate.config.auth.PrincipalDetails;
 import com.anan.Soulmate.dto.ResponseDTO;
 import com.anan.Soulmate.model.User;
 import com.anan.Soulmate.repository.UserRepository;
@@ -24,7 +25,12 @@ public class IndexController {
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final UserRepository userRepository;
 	@GetMapping("/")
-	public String index() {
+	public String index(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		/*
+		 * if( principalDetails != null) {
+		 * System.out.println(principalDetails.getUser()); return
+		 * "redirect:/user/diaryMain"; }
+		 */
 		return "index";
 	}
 	@GetMapping("/loginForm")
