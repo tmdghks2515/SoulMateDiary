@@ -10,12 +10,7 @@ section{
 	height: 16em;
 	padding:1em;
 }
-.btn{
-	color: white;
-	background-color: #816bfe;
-	padding: 0.6em;
-	border-radius: 5px;
-}
+
 form{
 	padding:10px;
 	float:left;
@@ -178,7 +173,7 @@ form div:last-child{
 	width: 10em;
 	padding: 10px;
 	margin: 20px auto;
-	background-color: #418d8d;
+	background-color: #ACACAC;
 	border-radius: 10px;
 }
 #viewMore a{

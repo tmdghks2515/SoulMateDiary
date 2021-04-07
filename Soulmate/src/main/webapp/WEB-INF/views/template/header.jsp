@@ -8,7 +8,7 @@
 <html>
 <body>
 	<header>
-		<a href="/">소울메이트</a> 
+		<a href="/">Soulmate</a> 
 		<div>
 			<c:choose>
 				<c:when test="${empty principal }">

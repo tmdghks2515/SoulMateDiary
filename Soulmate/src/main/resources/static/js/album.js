@@ -1,3 +1,5 @@
+$("nav li a").eq(0).addClass("active");
+
 $("#btnAddCard").click(() => $("form").eq(0).toggleClass("hidden"));
 $("#btnShowSearch").click(() => $("form").eq(1).toggleClass("hidden"));
 

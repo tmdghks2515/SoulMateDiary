@@ -9,21 +9,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.json.JSONObject;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -31,9 +27,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.anan.Soulmate.config.auth.PrincipalDetails;
 import com.anan.Soulmate.dto.ResponseDTO;
 import com.anan.Soulmate.model.Album;
+import com.anan.Soulmate.model.Diary;
 import com.anan.Soulmate.model.Soulmate;
 import com.anan.Soulmate.model.User;
 import com.anan.Soulmate.repository.AlbumRepository;
+import com.anan.Soulmate.repository.DiaryRepository;
 import com.anan.Soulmate.repository.SoulmateRepository;
 import com.anan.Soulmate.repository.UserRepository;
 
@@ -46,6 +44,7 @@ public class diaryController {
 	private final UserRepository userRepository;
 	private final AlbumRepository albumRepository;
 	private final SoulmateRepository soulmateRepository;
+	private final DiaryRepository diaryRepository;
 	
 	public void setDday(User principal, HttpServletRequest req) {
 		
@@ -202,5 +201,62 @@ public class diaryController {
 		return "redirect:/user/album";
 	}
 	
+	@GetMapping("/user/diary")
+	public String diary(@AuthenticationPrincipal PrincipalDetails principalDetails,
+			@PageableDefault(page=0, size=2,sort="writeDate",direction = Sort.Direction.DESC) 
+	Pageable pageable, HttpServletRequest req) {
+		
+		User principal = principalDetails.getUser();
+		if(soulmateRepository.findByUser1(principal) == null 
+				&& soulmateRepository.findByUser2(principal) == null) {
+			return "redirect:/user/solo";
+		}
+		setDday(principal, req);
+		setSoulmate(principal, req);
+		
+		Soulmate soulmate = soulmateRepository.findByUser1(principal);
+		if(soulmate == null)
+			soulmate = soulmateRepository.findByUser2(principal);
+		Page<Diary> diaries = diaryRepository.findBySoulmate(soulmate, pageable);
+		req.setAttribute("diaries", diaries.getContent());
+		req.setAttribute("diaryPage", diaries);
+		
+		return "user/diary";
+	}
+	
+	@GetMapping("/user/diaryForm")
+	public String diaryForm(@AuthenticationPrincipal PrincipalDetails principalDetails,
+			 HttpServletRequest req) {
+		
+		User principal = principalDetails.getUser();
+		if(soulmateRepository.findByUser1(principal) == null 
+				&& soulmateRepository.findByUser2(principal) == null) {
+			return "redirect:/user/solo";
+		}
+		setDday(principal, req);
+		setSoulmate(principal, req);
+		
+		return "user/diaryForm";
+	}
+	
+	@PostMapping("/user/diaryProc")
+	public String diaryProc(@AuthenticationPrincipal PrincipalDetails principalDetails,
+			String title, String content) {
+		
+		User principal = principalDetails.getUser();
+		Soulmate soulmate = soulmateRepository.findByUser1(principal);
+		if(soulmate == null) 
+			soulmate = soulmateRepository.findByUser2(principal);
+		Diary diary = Diary.builder()
+				.writer(principal)
+				.soulmate(soulmate)
+				.title(title)
+				.content(content)
+				.build();
+		
+		diaryRepository.save(diary);
+				
+		return "redirect:/user/diary";
+	}
 	
 }

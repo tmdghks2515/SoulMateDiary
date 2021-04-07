@@ -28,7 +28,7 @@
 			<li><a href="/user/album">앨범</a></li>
 			<li><a href="#">달력</a></li>
 			<li><a href="#">기념일</a></li>
-			<li><a href="#">일기장</a></li>
+			<li><a href="/user/diary">일기장</a></li>
 		</ul>
 	</nav>
 </body>
