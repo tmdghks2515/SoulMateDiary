@@ -8,15 +8,15 @@
 <link rel="stylesheet" href="/fontello-05cba82f/css/fontello.css">
 <link rel="stylesheet" href="/fontello-95e63002/css/fontello.css">
 <link rel="stylesheet" href="/css/user/diary.css">
-<title>소울메이트 :: 일기장</title>
+<title>소울메이트 :: 다이어리</title>
 </head>
 <body>
-	<%@include file="../template/header.jsp"%>
+	<jsp:include page="../template/header.jsp" />
 	<div class="container">
-		<%@include file="../template/nav.jsp"%>
+		<jsp:include page="../template/nav.jsp" />
 		<section>
 			<div class="top">
-				<a href="/user/diaryForm" class="btn">작성하기</a>
+				<a href="/user/diaryForm" class="btn">일기쓰기</a>
 			</div>
 			<hr>
 			<div>
@@ -33,7 +33,8 @@
 						<span>${diary.writer.name }</span>
 						<span class="title" >${diary.title }</span>
 						<div class="content">
-							<textarea readonly>${diary.content }</textarea>
+							<textarea readonly>${diary.content }</textarea><br>
+							<a href="/user/diaryDetail?id=${diary.id}">상세보기</a>
 						</div>
 					</div>
 				</c:forEach>

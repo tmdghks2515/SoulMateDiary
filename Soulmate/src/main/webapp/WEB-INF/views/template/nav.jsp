@@ -26,10 +26,11 @@
 		</div>
 		<ul>
 			<li><a href="/user/album">앨범</a></li>
+			<li><a href="/user/anniversary">기념일</a></li>
 			<li><a href="#">달력</a></li>
-			<li><a href="#">기념일</a></li>
 			<li><a href="/user/diary">일기장</a></li>
 		</ul>
 	</nav>
+	<script src="/lib/jquery-3.5.1.js"></script>
 </body>
 </html>

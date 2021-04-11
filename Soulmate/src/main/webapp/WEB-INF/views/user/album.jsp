@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,9 @@
 <title>소율메이트 :: 앨범</title>
 </head>
 <body>
-	<%@include file="../template/header.jsp"%>
+	<jsp:include page="../template/header.jsp" />
 	<div class="container">
-		<%@include file="../template/nav.jsp"%>
+		<jsp:include page="../template/nav.jsp" />
 		<section>
 			<div id="addCard">
 				<a href="#" id="btnAddCard" class="btn">사진 추가</a> <a href="#" id="btnShowSearch" class="btn">앨범
@@ -48,7 +49,7 @@
 			</div>
 			<hr>
 			<div id="cards">
-				<c:forEach var="album" items="${requestScope.albumPage.content}">
+				<c:forEach var="album" items="${albumPage.content}">
 					<div class="card" onclick="showModal('${album.title}','${album.soulmate.id}')">
 						<div>
 							<img src="/user/showImg?soulmateId=${album.soulmate.id}&title=${album.title}">
@@ -58,9 +59,9 @@
 						</div>
 					</div>
 				</c:forEach>
-				<c:if test="${!requestScope.albumPage.last}">
+				<c:if test="${!albumPage.last}">
 					<div id="viewMore">
-						<a href="/user/album?size=${requestScope.albumPage.size+10}">더보기</a>
+						<a href="/user/album?size=${albumPage.size+10}">더보기</a>
 					</div>
 				</c:if>
 			</div>

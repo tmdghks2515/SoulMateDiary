@@ -24,23 +24,22 @@ public class IndexController {
 	
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	private final UserRepository userRepository;
+	
 	@GetMapping("/")
 	public String index(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-		/*
-		 * if( principalDetails != null) {
-		 * System.out.println(principalDetails.getUser()); return
-		 * "redirect:/user/diaryMain"; }
-		 */
 		return "index";
 	}
+	
 	@GetMapping("/loginForm")
 	public String loginForm() {
 		return "loginForm";
 	}
+	
 	@GetMapping("/joinForm")
 	public String joinForm() {
 		return "joinForm";
 	}
+	
 	@PostMapping("/joinProc")
 	public String joinProc(User user, HttpServletResponse res) {
 		User userEntity = userRepository.findByUsername(user.getUsername());

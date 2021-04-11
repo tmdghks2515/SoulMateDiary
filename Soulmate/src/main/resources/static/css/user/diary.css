@@ -86,6 +86,7 @@ td[colspan="2"]{
 .content{
 	width:100%;
 	text-align: center;
+	position: relative;
 }
 .content textarea {
 	width: 95%;
@@ -116,4 +117,13 @@ td[colspan="2"]{
 }
 .dis{
 	background-color: #ACACAC !important;
+}
+.content a{
+	position: absolute;
+	right: 30px;
+	bottom: 14px;
+}
+.content a:hover{
+	text-decoration: underline;
+	color: #E2C547;
 }

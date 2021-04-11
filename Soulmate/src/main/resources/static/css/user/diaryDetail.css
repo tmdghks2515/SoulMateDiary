@@ -1,0 +1,65 @@
+@charset "UTF-8";
+#comment{
+	width: 750px;
+	margin: 50px auto;
+	border-top: 2px solid #d8d8d8;
+}
+#writeComment{
+	text-align: center;
+	padding: 20px;
+	color: #424242;
+	font-size: 15px;
+}
+#writeComment input{
+	padding: 8px;
+	width: 600px;
+	border: 1px solid #CDD1CC;
+	outline-color: #E2C547;
+}
+#writeComment a{
+	display: inline-block;
+	margin-left: -45px;
+	color: #E2C547;
+	cursor: pointer;
+}
+#writeComment a:hover{
+	text-decoration: underline;
+}
+.sub{
+	font-size: 18px;
+	font-weight: 700;
+}
+.sub-small{
+	font-size: 15px;
+	font-weight: 700;
+	display: inline-block;
+	margin-right: 10px;
+}
+.yellow{
+	color: #E2C547;
+}
+.cmt{
+	border-bottom: 1px solid #d8d8d8;
+	padding: 10px;
+	width: 640px;
+	margin: 0 auto;
+	font-size: 14px;
+}
+.cmt small{
+	font-size: 13px;
+	color: #a6a6a6;
+	font-weight: 600;
+	display: inline-block;
+	padding: 5px 0;
+}
+.page_i{
+	padding: 1px 8px !important;
+	font-weight: 500 !important;
+	display: inline-block;
+}
+#paging{
+	margin-bottom: 30px;
+}
+.mg{
+	margin:10px;
+}

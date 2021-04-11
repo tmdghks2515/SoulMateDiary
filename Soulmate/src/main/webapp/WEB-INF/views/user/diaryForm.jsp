@@ -18,9 +18,9 @@
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		return formatter.format(today);
 	}%>
-	<%@include file="../template/header.jsp"%>
+	<jsp:include page="../template/header.jsp" />
 	<div class="container">
-		<%@include file="../template/nav.jsp"%>
+		<jsp:include page="../template/nav.jsp" />
 		<section>
 			<form action="/user/diaryProc" method="POST" id="frmDiary">
 				<table>
@@ -44,7 +44,8 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<a href="#" class="btn" onclick="$('#frmDiary').submit()">작성하기</a>		
+							<a href="/user/diary" class="btn">목록보기</a>
+							<a href="#" class="btn" onclick="$('#frmDiary').submit()">저장</a>		
 						</td>
 					</tr>
 				</table>

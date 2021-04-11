@@ -7,7 +7,7 @@ section{
 	display: none;
 }
 #addCard{
-	height: 16em;
+	height: 17em;
 	padding:1em;
 }
 
@@ -33,7 +33,6 @@ form input{
 }
 #btnShowSearch{
 	float: left;
-	margin: 0 10px;
 }
 p{
 	padding: 3px;
@@ -214,10 +213,15 @@ form div:last-child{
 	border-radius: 100px;
 	width:300px;
 	color: black;
+	margin-top: 13px;
 }
 #frmSearch input{
 	border: none;
 	outline: none;
 	margin-left: 10px;
 	width: 80%;
+}
+td .btn{
+	display: inline-block;
+	margin: 0;
 }

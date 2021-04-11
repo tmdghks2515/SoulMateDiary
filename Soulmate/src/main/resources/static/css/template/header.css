@@ -40,4 +40,10 @@ header div a{
 	background-color: #E2C547;
 	padding: 0.6em;
 	border-radius: 5px;
+	cursor: pointer;
+	display: inline-block;
+	margin: 1em;
+}
+.btn:hover, .btn:active{
+	background-color: #D2B537;
 }

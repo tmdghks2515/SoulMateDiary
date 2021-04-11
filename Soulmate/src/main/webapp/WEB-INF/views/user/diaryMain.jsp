@@ -13,9 +13,9 @@
 <title>소울메이트 :: 다이어리</title>
 </head>
 <body>
-	<%@include file="../template/header.jsp"%>
+	<jsp:include page="../template/header.jsp" />
 	<div class="container">
-		<%@include file="../template/nav.jsp" %>
+		<jsp:include page="../template/nav.jsp" />
 		<section></section>
 	</div>
 	<script src="../lib/jquery-3.5.1.js"></script>

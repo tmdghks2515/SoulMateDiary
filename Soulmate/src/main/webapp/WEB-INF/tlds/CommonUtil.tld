@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+ 
+    <description>CommonUtil functions library</description>
+    <display-name>CommonUtil functions</display-name>
+    <tlib-version>1.1</tlib-version>
+    <short-name>cutil</short-name>
+    <uri>tld/CommonUtil.tld</uri>
+ 
+    <function>
+        <description>날짜 00전 으로 변경하기</description>
+        <name>dateDiff</name>
+        <function-class>com.anan.Soulmate.util.CommonUtil</function-class>
+        <function-signature>java.lang.String dateDiff(java.lang.String)</function-signature>
+        <example>
+        ${cutil:dateDiff(str)}
+        </example>
+    </function>
+    
+    <function>
+        <description>기념일 카운트</description>
+        <name>anniDateDiff</name>
+        <function-class>com.anan.Soulmate.util.CommonUtil</function-class>
+        <function-signature>java.lang.String anniDateDiff(java.lang.String)</function-signature>
+        <example>
+        ${cutil:anniDateDiff(str)}
+        </example>
+    </function>
+    
+</taglib>

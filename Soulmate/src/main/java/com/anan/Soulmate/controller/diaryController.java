@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import org.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -27,10 +30,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.anan.Soulmate.config.auth.PrincipalDetails;
 import com.anan.Soulmate.dto.ResponseDTO;
 import com.anan.Soulmate.model.Album;
+import com.anan.Soulmate.model.Anniversary;
 import com.anan.Soulmate.model.Diary;
+import com.anan.Soulmate.model.DiaryComment;
 import com.anan.Soulmate.model.Soulmate;
 import com.anan.Soulmate.model.User;
 import com.anan.Soulmate.repository.AlbumRepository;
+import com.anan.Soulmate.repository.AnniversaryRepository;
+import com.anan.Soulmate.repository.DiaryCommentRepository;
 import com.anan.Soulmate.repository.DiaryRepository;
 import com.anan.Soulmate.repository.SoulmateRepository;
 import com.anan.Soulmate.repository.UserRepository;
@@ -45,6 +52,8 @@ public class diaryController {
 	private final AlbumRepository albumRepository;
 	private final SoulmateRepository soulmateRepository;
 	private final DiaryRepository diaryRepository;
+	private final DiaryCommentRepository diaryCommentRepository;
+	private final AnniversaryRepository anniversaryRepository;
 	
 	public void setDday(User principal, HttpServletRequest req) {
 		
@@ -82,6 +91,52 @@ public class diaryController {
 		
 		req.setAttribute("soulmate", soulmate);
 		req.setAttribute("user2", user2);
+	}
+	
+	public void setDefaultAnniversaries(Soulmate soulmate, String Dday) {
+		
+		Date Ddate = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Ddate = sdf.parse(Dday);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(Ddate);
+		List<Anniversary> defaultAnniList = new ArrayList<>();
+		
+		 // 1일
+		Anniversary anni1 = Anniversary.builder().anniDate(Ddate).anniName("1일").soulmate(soulmate).build();
+		defaultAnniList.add(anni1);
+		
+		// 50일
+		c.add(Calendar.DATE, 49);
+		Date D50 = c.getTime();
+		Anniversary anni50 = Anniversary.builder().anniDate(D50).anniName("50일").soulmate(soulmate).build();
+		defaultAnniList.add(anni50);
+		c.add(Calendar.DATE, -49);
+		
+		// 100일 , 200일 ... 1000일
+		for(int i=1 ; i<=10 ; i++) {
+			c.add(Calendar.DATE, i*100-1);
+			Date date100 = c.getTime();
+			Anniversary anni100 = Anniversary.builder().anniDate(date100).anniName(i*100+"일").soulmate(soulmate).build();
+			defaultAnniList.add(anni100);
+			c.add(Calendar.DATE, -i*100+1);
+		}
+		
+		// 1주년, 2주년 ... 5주년
+		for(int i=1 ; i<=5 ; i++) {
+			c.set(c.get(Calendar.YEAR)+i, c.get(Calendar.MONTH), c.get(Calendar.DATE));
+			Date dateY = c.getTime();
+			Anniversary anniY = Anniversary.builder().anniDate(dateY).anniName(i+"주년").soulmate(soulmate).build();
+			defaultAnniList.add(anniY);
+			c.set(c.get(Calendar.YEAR)-i, c.get(Calendar.MONTH), c.get(Calendar.DATE));
+		}
+		
+		anniversaryRepository.saveAll(defaultAnniList);
+		
 	}
 	
 	@GetMapping("/user/diaryMain")
@@ -139,8 +194,13 @@ public class diaryController {
 				e.printStackTrace();
 			}
 			soulmate.setDdate(date);
-			
 			soulmateRepository.save(soulmate);
+			
+			Soulmate soulmateEntity = soulmateRepository.findByUser1(principal);
+			if(soulmateEntity == null)
+				soulmateRepository.findByUser2(principal);
+			setDefaultAnniversaries(soulmateEntity, Dday);
+			
 		}
 		return new JSONObject(resp).toString();
 	}
@@ -203,7 +263,7 @@ public class diaryController {
 	
 	@GetMapping("/user/diary")
 	public String diary(@AuthenticationPrincipal PrincipalDetails principalDetails,
-			@PageableDefault(page=0, size=2,sort="writeDate",direction = Sort.Direction.DESC) 
+			@PageableDefault(page=0, size=10,sort="writeDate",direction = Sort.Direction.DESC) 
 	Pageable pageable, HttpServletRequest req) {
 		
 		User principal = principalDetails.getUser();
@@ -258,5 +318,73 @@ public class diaryController {
 				
 		return "redirect:/user/diary";
 	}
+	
+	@GetMapping("/user/diaryDetail")
+	public String diaryDetail(Long id, HttpServletRequest req,
+			@AuthenticationPrincipal PrincipalDetails principalDetails,
+			@PageableDefault(page=0, size=5,sort="writeDate",direction = Sort.Direction.DESC) 
+			Pageable pageable) {
+		
+		User principal = principalDetails.getUser();
+		if(soulmateRepository.findByUser1(principal) == null 
+				&& soulmateRepository.findByUser2(principal) == null) {
+			return "redirect:/user/solo";
+		}
+		setDday(principal, req);
+		setSoulmate(principal, req);
+		
+		Diary diary = diaryRepository.findById(id).orElseThrow(() -> 
+			new IllegalArgumentException("해당 일기는 존재하지 않습니다"));
+		req.setAttribute("diary", diary);
+		
+		Page<DiaryComment> cmtListPage = diaryCommentRepository.findByDiary(diary, pageable);
+		req.setAttribute("cmtList", cmtListPage.getContent());
+		req.setAttribute("cmtListPage", cmtListPage);
+		
+		return "user/diaryDetail";
+	}
+	
+	@PostMapping("/user/writeComment")
+	public String writeComment(Long id, String content, 
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		User principal = principalDetails.getUser();
+		Diary diary = diaryRepository.findById(id).orElseThrow(() -> 
+				new IllegalArgumentException("해당 일기는 존재하지 않습니다"));
+		
+		DiaryComment comment = DiaryComment.builder()
+				.content(content)
+				.writer(principal)
+				.diary(diary)
+				.build();
+		
+		diaryCommentRepository.save(comment);
+		
+		return "redirect:/user/diaryDetail?id="+id;
+	}
+	
+	@GetMapping("/user/anniversary")
+	public String anniversary(HttpServletRequest req,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		User principal = principalDetails.getUser();
+		if(soulmateRepository.findByUser1(principal) == null 
+				&& soulmateRepository.findByUser2(principal) == null) {
+			return "redirect:/user/solo";
+		}
+		setDday(principal, req);
+		setSoulmate(principal, req);
+		
+		Soulmate soulmate = soulmateRepository.findByUser1(principal);
+		if(soulmate == null)
+			soulmate = soulmateRepository.findByUser2(principal);
+		
+		List<Anniversary> anniList =  anniversaryRepository.findBySoulmate(soulmate, Sort.by(Direction.ASC, "anniDate"));
+		req.setAttribute("anniList", anniList);
+		
+		return "user/anniversary";
+	}
+	
+
 	
 }
