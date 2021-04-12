@@ -22,5 +22,6 @@
 		</div>
 	</header>
 </body>
-<link rel="stylesheet" href="/css/template/header.css"></link>
+<link rel="stylesheet" href="/css/template/header.css" />
+<link rel="stylesheet" href="/fontello-95e63002/css/fontello.css" />
 </html>

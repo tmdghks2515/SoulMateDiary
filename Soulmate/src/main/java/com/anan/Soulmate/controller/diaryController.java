@@ -385,6 +385,19 @@ public class diaryController {
 		return "user/anniversary";
 	}
 	
-
+	@GetMapping("/user/calendar")
+	public String calendar(HttpServletRequest req,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		User principal = principalDetails.getUser();
+		if(soulmateRepository.findByUser1(principal) == null 
+				&& soulmateRepository.findByUser2(principal) == null) {
+			return "redirect:/user/solo";
+		}
+		setDday(principal, req);
+		setSoulmate(principal, req);
+		
+		return "user/calendar";
+	}
 	
 }

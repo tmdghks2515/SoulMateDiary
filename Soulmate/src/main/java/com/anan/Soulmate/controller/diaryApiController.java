@@ -168,4 +168,16 @@ public class diaryApiController {
 		return resp.toString();
 	}
 	
+	@GetMapping("/user/getMonthAnni")
+	public String getMonthAnni(int anniYear, int anniMonth) {
+		
+		System.out.println(anniYear+" "+anniMonth);
+		List<Anniversary> anniList = anniversaryRepository.findByYearAndMonth(anniYear, anniMonth);
+		JSONObject resp = new JSONObject();
+		System.out.println(anniList);
+		resp.put("result", anniList);
+		
+		return resp.toString();
+	}
+	
 }
