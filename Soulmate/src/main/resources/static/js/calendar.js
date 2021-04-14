@@ -74,16 +74,29 @@ function calendarMaker(target, date) {
 		$(".custom_calendar_table").on("click", ".prev", function() {
 			nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
 			calendarMaker($(target), nowDate);
+			$("td").click(function() {
+				modal.style.display = "block";
+				let date = String(nowDate.getFullYear()) + "-" + (nowDate.getMonth() + 1) + "-" + $(this).text().substring(0, 2);
+				$(".modal-content p").text(date);
+				$(".modal-content input[type=hidden]").val(date);
+			})
 		});
 		//다음달 클릭
 		$(".custom_calendar_table").on("click", ".next", function() {
 			nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, nowDate.getDate());
 			calendarMaker($(target), nowDate);
+			$("td").click(function() {
+				modal.style.display = "block";
+				let date = String(nowDate.getFullYear()) + "-" + (nowDate.getMonth() + 1) + "-" + $(this).text().substring(0, 2);
+				$(".modal-content p").text(date);
+				$(".modal-content input[type=hidden]").val(date);
+			})
 		});
 	}
 
-	// 이번달 기념일 객체 가져오기
+	// 이번달 기념일 list, 스케듈 list 서버에서 받아오기
 	let anniList;
+	let scheduleList;
 	$.ajax({
 		url: '/user/getMonthAnni',
 		data: { 'anniMonth': nowDate.getMonth() + 1, 'anniYear': nowDate.getFullYear() },
@@ -91,22 +104,60 @@ function calendarMaker(target, date) {
 		async: false,
 		success: (resp) => {
 			anniList = resp.result;
+			scheduleList = resp.scheduleList;
 		}
 	})
-	console.log(anniList);
+	// 기념일 달력에 뿌리기
 	for (i = 0; i < anniList.length; i++) {
 		let no = anniList[i].anniDate;
 		no = no.substring(8, 10);
 		$("#custom_set_date td").eq(Number(thisMonth.getDay()) + Number(no) - 1)
-			.append("<br><span class='anni'>" + anniList[i].anniName + "</span>");
+			.append("<br><span class='anni'>" + anniList[i].anniName + "</span>")
 	}
+	// 스케듈 달력에 뿌리기
+	for (i = 0; i < scheduleList.length; i++) {
+		let no = scheduleList[i].scheduleTime;
+		no = no.substring(8, 10);
+		$("#custom_set_date td").eq(Number(thisMonth.getDay()) + Number(no) - 1)
+			.append('<p class="schedule">' + scheduleList[i].scheduleName + '</p>');
+	}
+	
 
 	let today = new Date();
-	if (date.getMonth() == today.getMonth()) {
+	if (date.getFullYear() == today.getFullYear() && date.getMonth() == today.getMonth()) {
 		$("#custom_set_date td").eq(
 			Number(thisMonth.getDay() + Number(today.getDate()) - 1)).addClass("select_day");
 	}
 
-	$(".anni").parent().css("border","3px solid #E2C547");
+	$(".anni").parent().css("border", "3px solid #E2C547");
+}
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+$("td").click(function() {
+	modal.style.display = "block";
+	let date = String(nowDate.getFullYear()) + "-" + (nowDate.getMonth() + 1) + "-" + $(this).text().substring(0, 2);
+	$(".modal-content p").text(date);
+	$(".modal-content input[type=hidden]").val(date);
+})
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+	modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
 }
 

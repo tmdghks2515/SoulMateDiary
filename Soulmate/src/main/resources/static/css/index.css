@@ -1,4 +1,8 @@
 @charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+}
 .container {
 	display: flex;
 	align-items: center;
@@ -9,6 +13,113 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #e8e8e8;
+	background-color: #f7f7f7;
 	width: 100%;
+	border: 2px solid #e8e8e8;
+	text-align: center;
+	padding-top: 120px;
+}
+#myPage{
+	width: 100%;
+	text-align: center;
+	padding: 30px;
+	margin-top: 100px;
+}
+#myPage a{
+	color: white;
+	font-size: 18px;
+	font-weight: 600;
+	text-shadow: 0 -2px 5px gray; 
+	background-color: #99bfb2;
+	padding: 10px 40px;
+	border: 1px solid #e8e8e8;
+	border-radius: 4px;
+}
+.icon-right-open{
+	color: white;
+}
+.textarea{
+	resize: none;
+	border:none;
+	outline:none;
+	font-size: 1em;
+	padding: 0;
+	margin: 0;
+	font-size: 38px;
+	font-weight: 500;
+	color: #14c1c7;
+	background-color: #f7f7f7;
+	height: 250px;
+	box-sizing: border-box;
+	width: 400px;
+}
+.tit{
+	font-size: 38px;
+	font-weight: 300;
+	color: #555555;
+	text-align: left;
+	width: 400px;
+	margin: 0 !important;
+	box-sizing: border-box;
+	display: inline-block;
+}
+input, textarea{
+	outline-color: #e2c546;
+}
+.carouselTitle{
+	width: 400px;
+	padding: 5px;
+	border: 2px solid #e8e8e8;
+	border-radius: 4px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+.carouselContent{
+	width: 400px;
+	padding: 5px;
+	border: 2px solid #e8e8e8;
+	border-radius: 4px;
+	resize: none;
+	margin-bottom: 0px;
+}
+.slider>div:first-child .btn{
+	padding: 5px 8px;
+	margin: 0;
+}
+.slider img{
+	height: 500px;
+	box-shadow: 0 3px 10px #c8c8c8;
+}
+.text{
+	padding: 30px;
+	display: inline-block;
+	text-align: left;
+}
+.picture{
+	display: inline-block;
+	text-align: left;
+}
+.prev{
+	position: absolute;
+	left: 10px;
+	top: 400px;
+	z-index: 5;
+	font-size: 30px;
+	color: #c8c8c8;
+	cursor: pointer;
+}
+.next{
+	position: absolute;
+	right: 10px;
+	top: 400px;
+	z-index: 5;
+	font-size: 30px;
+	color: #c8c8c8;
+	cursor: pointer;
+}
+#content2, #content3{
+	font-weight: 400;
+	font-size: 1em;
+	color: #555555;
+	margin-top: 30px;
 }

@@ -50,7 +50,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 				return user.getRole();
 			}
 		});
-		return null;
+		return collect;
 	}
 
 	@Override

@@ -28,10 +28,14 @@ import com.anan.Soulmate.config.auth.PrincipalDetails;
 import com.anan.Soulmate.dto.ResponseDTO;
 import com.anan.Soulmate.model.Album;
 import com.anan.Soulmate.model.Anniversary;
+import com.anan.Soulmate.model.MainCarousel;
+import com.anan.Soulmate.model.Schedule;
 import com.anan.Soulmate.model.Soulmate;
 import com.anan.Soulmate.model.User;
 import com.anan.Soulmate.repository.AlbumRepository;
 import com.anan.Soulmate.repository.AnniversaryRepository;
+import com.anan.Soulmate.repository.CarouselRepository;
+import com.anan.Soulmate.repository.ScheduleRepository;
 import com.anan.Soulmate.repository.SoulmateRepository;
 import com.anan.Soulmate.repository.UserRepository;
 
@@ -42,10 +46,11 @@ import net.minidev.json.JSONArray;
 @RequiredArgsConstructor
 public class diaryApiController {
 	
-	private final UserRepository userRepository;
 	private final AlbumRepository albumRepository;
 	private final SoulmateRepository soulmateRepository;
 	private final AnniversaryRepository anniversaryRepository;
+	private final ScheduleRepository scheduleRepository;
+	private final CarouselRepository carouselRepository;
 	
 	@RequestMapping("/user/showImg")
 	public int showimg(String soulmateId, String title, Integer no, HttpServletResponse res) {
@@ -169,15 +174,93 @@ public class diaryApiController {
 	}
 	
 	@GetMapping("/user/getMonthAnni")
-	public String getMonthAnni(int anniYear, int anniMonth) {
+	public String getMonthAnni(int anniYear, int anniMonth,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
-		System.out.println(anniYear+" "+anniMonth);
-		List<Anniversary> anniList = anniversaryRepository.findByYearAndMonth(anniYear, anniMonth);
+		// principal 의 soulmate 불러오기
+		User principal = principalDetails.getUser();
+		Soulmate soulmate = soulmateRepository.findByUser1(principal);
+		if(soulmate == null)
+			soulmate = soulmateRepository.findByUser1(principal);
+		
+		// 해당 soulmate 의 anniversary entity 리스트 JsonObject에 담아주기
+		List<Anniversary> anniList = anniversaryRepository.findByYearAndMonth(anniYear, anniMonth, soulmate.getId());
 		JSONObject resp = new JSONObject();
-		System.out.println(anniList);
 		resp.put("result", anniList);
 		
+		// 해당 soulmate 의  schedule entity 리스트 JsonObject에 담아주기
+		List<Schedule> scheduleList = scheduleRepository.findByYearAndMonth(anniYear, anniMonth, soulmate.getId());
+		resp.put("scheduleList", scheduleList);
+		
 		return resp.toString();
+	}
+	
+	@GetMapping("/getCarousels")
+	public String getCarousels() {
+		
+		JSONObject resp = new JSONObject();
+		List<MainCarousel> carouselList = (List<MainCarousel>) carouselRepository.findAll();
+		if(carouselList == null || carouselList.size() == 0) {
+			for(int i=1; i<=3; i++) {
+				MainCarousel MC = MainCarousel.builder().page(i).build();
+				carouselList.add(MC);
+			}
+			carouselRepository.saveAll(carouselList);
+			carouselList = (List<MainCarousel>) carouselRepository.findAll();
+		}
+		resp.put("result", carouselList);
+		
+		return resp.toString();
+	}
+	
+	@PostMapping("/admin/updateCarousel")
+	public String updateCarousel(String title, String content, int page) {
+		
+		// 해당 page의 캐러셀 entity를 불러와서 title, content 변경후 저장.
+		MainCarousel carousel = carouselRepository.findById(page).orElseThrow(() ->
+			new IllegalArgumentException("해당 캐러셀 없음"));
+		carousel.setTitle(title);
+		carousel.setContent(content);
+		System.out.println(carousel);
+		System.out.println("/////////////////////////");
+		carouselRepository.save(carousel);
+		
+		ResponseDTO<String> res = new ResponseDTO<>();
+		res.setResponseCode(200);
+		res.setResponseMessage("변경에 성공했습니다.");
+		JSONObject resp = new JSONObject(res);
+		
+		return resp.toString();
+	}
+	
+	@GetMapping("/carouselImg")
+	public String carouselImg(int page, HttpServletResponse res) {
+		String path = "C:\\Soulmate\\main\\";
+		File folder = new File(path);
+		File[] fList = folder.listFiles();
+		File file = fList[page-1];
+		try {
+			FileInputStream fis = new FileInputStream(file);
+			BufferedOutputStream bos = new BufferedOutputStream(res.getOutputStream());
+			byte[] buffer = new byte[1024 * 1024 * 50];
+			while(true){
+				int size = fis.read(buffer);//읽어온 바이트수
+				if(size == -1) break;//더이상 읽을 내용이 없다
+				bos.write(buffer,0,size);
+				bos.flush();
+		}
+			fis.close();
+			bos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		res.setContentType(MediaType.TEXT_HTML_VALUE);
+		
+		return null;
 	}
 	
 }

@@ -62,7 +62,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			user = User.builder().username(username)
 					.password(password)
 					.email(oauth2UserInfo.getEmail())
-					.Role("ROLE_USER")
+					.role("ROLE_USER")
 					.name(oauth2UserInfo.getName())
 					.build();
 			userRepository.save(user);

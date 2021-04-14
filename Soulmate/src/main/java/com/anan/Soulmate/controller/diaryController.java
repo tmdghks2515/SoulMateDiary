@@ -23,6 +23,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -33,12 +34,16 @@ import com.anan.Soulmate.model.Album;
 import com.anan.Soulmate.model.Anniversary;
 import com.anan.Soulmate.model.Diary;
 import com.anan.Soulmate.model.DiaryComment;
+import com.anan.Soulmate.model.MainCarousel;
+import com.anan.Soulmate.model.Schedule;
 import com.anan.Soulmate.model.Soulmate;
 import com.anan.Soulmate.model.User;
 import com.anan.Soulmate.repository.AlbumRepository;
 import com.anan.Soulmate.repository.AnniversaryRepository;
+import com.anan.Soulmate.repository.CarouselRepository;
 import com.anan.Soulmate.repository.DiaryCommentRepository;
 import com.anan.Soulmate.repository.DiaryRepository;
+import com.anan.Soulmate.repository.ScheduleRepository;
 import com.anan.Soulmate.repository.SoulmateRepository;
 import com.anan.Soulmate.repository.UserRepository;
 
@@ -54,6 +59,8 @@ public class diaryController {
 	private final DiaryRepository diaryRepository;
 	private final DiaryCommentRepository diaryCommentRepository;
 	private final AnniversaryRepository anniversaryRepository;
+	private final ScheduleRepository scheduleRepository;
+	private final CarouselRepository carouselRepository;
 	
 	public void setDday(User principal, HttpServletRequest req) {
 		
@@ -398,6 +405,56 @@ public class diaryController {
 		setSoulmate(principal, req);
 		
 		return "user/calendar";
+	}
+	
+     // 스케듈 등록하는 메서드
+	@PostMapping("/user/saveSchedule")
+	public String saveSchedule(String date, String time, String name,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
+		
+		// principal 의 Soulmate 객체 가져오기
+		User principal = principalDetails.getUser();
+		Soulmate soulmate = soulmateRepository.findByUser1(principal);
+		if(soulmate == null)
+			soulmate = soulmateRepository.findByUser2(principal);
+		
+		// 받아온 데이터 Date 타입으로 파싱
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String str = date+" "+time;
+		Date scheduleTime = null;
+		try {
+			scheduleTime= sdf.parse(str);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		// Schedule 객체 생성
+		Schedule schedule = Schedule.builder()
+				.scheduleName(name)
+				.scheduleTime(scheduleTime)
+				.soulmate(soulmate)
+				.build();
+		
+		// DB에 Schedule 객체 저장
+		scheduleRepository.save(schedule);
+		
+		return "redirect:/user/calendar";
+	}
+	
+	@PostMapping("/admin/changeCarouselImg")
+	public String changeCarouselImg(int page, MultipartHttpServletRequest req) {
+		
+		MultipartFile file = req.getFile("file");
+		String path = "C:\\Soulmate\\main\\"+page;
+		try {
+			file.transferTo(new File(path));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/";
 	}
 	
 }

@@ -1,23 +1,15 @@
 package com.anan.Soulmate.model;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,23 +21,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class Schedule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(unique = true)
-	private String username;
+	@JoinColumn(name = "soulmateId")
+	@ManyToOne
+	private Soulmate soulmate;
 	
-	private String password;
+	private String scheduleName;
 	
-	private String name;
-	
-	private String email;
-	
-	private String role;
-	
-	@CreationTimestamp
-	private Timestamp createDate;
-	
+	@Temporal(TemporalType.DATE)
+	private Date scheduleTime;
 }
