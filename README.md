@@ -15,9 +15,7 @@ __커플 앱의 웹 버전 소프트웨어__  입니다.
 * GitHub
 
 ## 📋 사용 기술  
-<font size="5">백엔드</font>  
-<br><br>
-
+### 백엔드  
 Spring Boot
   
 * JAVA 11
@@ -31,12 +29,9 @@ Build Tool
 
 DataBase
 * Mysql
-<br>
-<br>
 
-<font size="5">프론트 엔드</font>  
-<br>
 
+### 프론트 엔드  
 * Javascript
 * jQuery
 * jsp  
