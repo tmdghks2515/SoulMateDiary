@@ -1,4 +1,4 @@
-#💗 소울메이트 다이어리 💗
+# 💗 소울메이트 다이어리 💗
 ![GitHub repo size](https://img.shields.io/github/repo-size/tmdghks2515/SoulmateDiary)
 ![GitHub contributors](https://img.shields.io/github/contributors/tmdghks2515/SoulmateDiary)
   
@@ -9,12 +9,12 @@ __커플 앱의 웹 버전 소프트웨어__  입니다.
 사용하고 있던 커플 앱이 커플 간 연동이 되지 않아 불편함을 느껴  
 모든 기능이 커플 간 연동이 되는 커플 앱을 웹 버전으로 만들어보고 싶었습니다.
 
-###📋 개발환경
+### 📋 개발환경
 * Spring Tool Suite(STS)
 * Mysql Workbench
 * GitHub
 
-###📋 사용 기술  
+### 📋 사용 기술  
 <font size="5">백엔드</font>  
 <br><br>
 
