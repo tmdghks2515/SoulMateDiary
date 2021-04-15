@@ -1,49 +1,73 @@
 @charset "UTF-8";
-*{
+
+* {
 	padding: 0;
 	margin: 0;
-	font-family: 'Noto Sans KR' ;
+	font-family: 'Noto Sans KR';
 	color: #121212;
 }
-header{
-	text-align: center;
+
+header {
+	text-align: left;
 	padding: 1em 0;
-	background-color:#99BFB3;
-	position: relative; 
+	background-color: #99BFB3;
+	position: relative;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ff8690+0,ffbed5+100 */
+	background: #ff8690; /* Old browsers */
+	background: -moz-linear-gradient(left, #ff8690 0%, #ffbed5 100%);
+	/* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #ff8690 0%, #ffbed5 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #ff8690 0%, #ffbed5 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8690',
+		endColorstr='#ffbed5', GradientType=1); /* IE6-9 */
 }
-a{
+
+a {
 	text-decoration: none;
 	color: black;
+	display: inline-block;
 }
-header>a{
+
+header>a {
 	font-weight: 700;
 	font-size: 1.5rem;
 	font-family: 'CookieRun';
 	color: white;
-	text-shadow: 3px 3px 5px rgba(50,50,50,0.5);
+	text-shadow: 3px 3px 5px rgba(50, 50, 50, 0.5);
+	margin-left: 80px;
 }
-header div{
+
+header div {
 	display: inline-block;
 	position: absolute;
 	right: 20px;
 	font-weight: 600;
 	color: white;
 }
-header div a{
+
+header div a {
 	font-weight: 600;
 	color: white;
 	display: inline-block;
 	margin-top: 4px;
+	margin-left: 0;
 }
-.btn{
+
+.btn {
 	color: white;
-	background-color: #E2C547;
+	background-color: #9F4348;
 	padding: 0.6em;
 	border-radius: 5px;
 	cursor: pointer;
 	display: inline-block;
 	margin: 1em;
 }
-.btn:hover, .btn:active{
-	background-color: #D2B537;
+
+.btn:hover, .btn:active {
+	background-color: #aF5358;
+}
+input,textarea {
+	outline-color: #aF5358;
 }

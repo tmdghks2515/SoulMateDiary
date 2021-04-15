@@ -23,7 +23,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -34,7 +33,6 @@ import com.anan.Soulmate.model.Album;
 import com.anan.Soulmate.model.Anniversary;
 import com.anan.Soulmate.model.Diary;
 import com.anan.Soulmate.model.DiaryComment;
-import com.anan.Soulmate.model.MainCarousel;
 import com.anan.Soulmate.model.Schedule;
 import com.anan.Soulmate.model.Soulmate;
 import com.anan.Soulmate.model.User;
@@ -445,9 +443,14 @@ public class diaryController {
 	public String changeCarouselImg(int page, MultipartHttpServletRequest req) {
 		
 		MultipartFile file = req.getFile("file");
-		String path = "C:\\Soulmate\\main\\"+page;
+		String fileName = file.getOriginalFilename();
+		String[] arr = fileName.split("\\.");
+		String path = "C:\\Soulmate\\main\\"+page+"."+arr[1];
+		File newFile = new File(path);
+		if(newFile.exists())
+			newFile.delete();
 		try {
-			file.transferTo(new File(path));
+			file.transferTo(newFile);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

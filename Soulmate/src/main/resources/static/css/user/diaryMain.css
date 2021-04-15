@@ -1,65 +1,81 @@
 @charset "UTF-8";
-html,body{
+
+html, body {
 	height: 100%;
 }
-.container{
+
+.container {
 	display: flex;
 	min-height: 100%;
 }
-nav{
-	background-color: #a9cfc3;
-	min-height:100%;
+
+nav {
+	min-height: 100%;
 	box-sizing: border-box;
+	/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ff8690+0,ffbed5+100 */
+	background: #ff8690; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ff8690 0%, #ffbed5 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #ff8690 0%,#ffbed5 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #ff8690 0%,#ffbed5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8690', endColorstr='#ffbed5',GradientType=0 ); /* IE6-9 */
+
 }
-nav li a{
+
+nav li a {
 	color: white;
 	display: inline-block;
 	font-size: 1.3rem;
-	padding:1em 1.5em;
+	padding: 1em 1.5em;
 	display: block;
 	text-align: center;
 	transition: 0.2s;
 }
-nav li a:hover{
-	background-color: #99BFB3;
+
+nav li a:hover {
+	background-color: #dF7680;
 	font-weight: 700;
 }
-nav #single{
+
+nav #single {
 	text-align: center;
 	font-family: 'CookieRun';
 	color: white;
 	padding: 0.4em;
 }
-nav #single a{
+
+nav #single a {
 	color: white;
 	padding: 0.3em;
 	display: inline-block;
 	margin: 10px;
-	background-color: #99BFB3;
+	background-color: #ff8690;
 	border-radius: 10px;
 }
-nav #single a:hover{
-	background-color: #89aFa3;
+
+nav #single a:hover {
+	background-color: #dF7680;
 }
-nav{
+
+nav {
 	flex: 1;
 }
-section{
+
+section {
 	flex: 9;
-	background-color: #e8e8e8;
+	background-color: #ffffff;
 }
-nav div{
+
+nav div {
 	text-align: center;
 	padding: 10px;
 	color: white;
 	font-weight: 700;
 }
-.active{
-	background-color: #99BFB3;
+
+.active {
+	background-color: #dF7680;
 }
-input {
-	outline-color: #E2C547;
-}
-.hidden{
+
+.hidden {
 	display: none;
 }

@@ -38,12 +38,12 @@ form input[type=date]{
 	margin: 20px 80px;
 	border-radius: 5px;
 	padding: 0 30px;
-	background-color: #eeeeee;
+	background-color: #f5f5f5;
 	display: flex;
-	box-shadow: 2px 0px 10px #999999;
+	box-shadow: 0 5px 5px #c8c8c8;
 }
 .anniBox:hover{
-	border: 2px solid  #E2C547;
+	border: 2px solid  #FF8690;
 }
 .anniBox span{
 	display: inline-block;
@@ -105,7 +105,7 @@ form input[type=date]{
 	width: 99%;
 	display: block;
 	margin: 0 auto;
-	outline-color: #E2C547;
+	outline-color: #FF665A;
 	padding: 10px;
 	height: 300px;
 	border: none;
@@ -145,8 +145,10 @@ form input[type=date]{
 	padding-left: 5px;
 } 
 .yellow{
-	box-shadow: 3px 0 50px #F2D264;
+	box-shadow: 0 10px 10px #F2D264;
+	border-color: #F2D264;
 }
 .red{
-	box-shadow: 3px 0 50px #FF665A;
+	box-shadow: 0 10px 10px #FF665A;
+	border-color: #FF665A;
 }

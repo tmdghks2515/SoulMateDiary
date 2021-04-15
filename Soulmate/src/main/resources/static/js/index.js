@@ -36,13 +36,12 @@ $('.slider').slick({
 	dots: true,
 	fade: true,
 	cssEase: 'linear',
-	autoplay: true,
+	autoplay: false,
 	prevArrow: $('.prev'),
 	nextArrow: $('.next')
 });
 
 // 사진 변경
 function changeImage(page) {
-	console.log("작동");
-	$("form").eq(page-1).submit();
+	$(".picture form").eq(page-1).submit();
 }

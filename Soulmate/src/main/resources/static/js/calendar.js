@@ -129,7 +129,7 @@ function calendarMaker(target, date) {
 			Number(thisMonth.getDay() + Number(today.getDate()) - 1)).addClass("select_day");
 	}
 
-	$(".anni").parent().css("border", "3px solid #E2C547");
+	$(".anni").parent().css("border", "3px solid #FF8690");
 }
 
 // Get the modal

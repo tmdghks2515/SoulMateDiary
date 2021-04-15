@@ -92,11 +92,11 @@
 		<div id="myPage">
 			<c:choose>
 				<c:when test="${empty principal}">
-					<a href="/loginForm">회원가입 하러가기 <span class="icon-right-open"></span>
+					<a href="/loginForm" class="btnWide">회원가입 하러가기 <span class="icon-right-open"></span>
 					</a>
 				</c:when>
 				<c:otherwise>
-					<a href="/user/diaryMain">마이 페이지</a>
+					<a href="/user/diaryMain" class="btnWide">마이 페이지</a>
 				</c:otherwise>
 			</c:choose>
 		</div>

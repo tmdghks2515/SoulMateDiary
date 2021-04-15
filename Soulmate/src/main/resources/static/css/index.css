@@ -20,20 +20,22 @@
 	padding-top: 120px;
 }
 #myPage{
-	width: 100%;
 	text-align: center;
 	padding: 30px;
 	margin-top: 100px;
 }
-#myPage a{
+.btnWide{
 	color: white;
 	font-size: 18px;
 	font-weight: 600;
-	text-shadow: 0 -2px 5px gray; 
-	background-color: #99bfb2;
+	text-shadow: 0 1px 2px gray; 
+	background-color: #FFBED5;
 	padding: 10px 40px;
 	border: 1px solid #e8e8e8;
 	border-radius: 4px;
+}
+.btnWide:hover{
+	background-color: #EFAEC5;
 }
 .icon-right-open{
 	color: white;
@@ -89,6 +91,7 @@ input, textarea{
 .slider img{
 	height: 500px;
 	box-shadow: 0 3px 10px #c8c8c8;
+	border-radius: 4px;
 }
 .text{
 	padding: 30px;
@@ -107,6 +110,7 @@ input, textarea{
 	font-size: 30px;
 	color: #c8c8c8;
 	cursor: pointer;
+	margin-left: 80px;
 }
 .next{
 	position: absolute;
@@ -116,10 +120,14 @@ input, textarea{
 	font-size: 30px;
 	color: #c8c8c8;
 	cursor: pointer;
+	margin-right: 80px;
 }
 #content2, #content3{
 	font-weight: 400;
 	font-size: 1em;
 	color: #555555;
 	margin-top: 30px;
+}
+#content1{
+	color: #F23064;
 }

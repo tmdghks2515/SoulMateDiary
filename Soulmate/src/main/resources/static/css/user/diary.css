@@ -15,7 +15,7 @@
 	padding: 10px;
 	border-radius: 5px;
 	border: 1px solid #c8c8c8;
-	outline-color: #E2C547;
+	outline-color: #CC6B73;
 	transition: all 0.2s;
 }
 table{
@@ -26,7 +26,7 @@ table{
 	margin: 10px;
 }
 textarea{
-	outline-color: #E2C547;
+	outline-color: #CC6B73;
 	padding: 10px;
 	resize:none;
 	border-radius: 5px;
@@ -44,27 +44,31 @@ td[colspan="2"]{
 	vertical-align: top;
 }
 .row{
-	border-bottom: 2px solid #CDD1CC;
+	border-bottom: 2px solid #e8e8e8;
 	margin: 0 auto;
 	width: 1000px;
 }
 .th{
 	width: 1000px;
 	margin: 10px auto;
-	border-bottom: 2px solid #ACACAC;
+	border-bottom: 2px solid #f1f1f1;
 	color: #d8d8d8;
 	font-weight: 700;
 	margin-top: 120px;
+	background-color: #CC6B73;
+}
+.th span{
+	color: white;	
 }
 .row div{
 	display: none;
 }
 .title{
 	cursor: pointer;
+	text-decoration: underline;
 }
 .title:hover{
-	text-decoration: underline;
-	color:#E2C547;
+	color:#CC6B73;
 }
 .th span, .row span{
 	text-align: center;
@@ -97,7 +101,7 @@ td[colspan="2"]{
 	margin-top:40px;
 }
 #paging a{
-	background-color: #99BFB3;
+	background-color: #CC6B73;
 	color: white;
 	font-size: 18px;
 	font-weight: 900;
@@ -108,7 +112,7 @@ td[colspan="2"]{
 	padding-bottom: 3px; 
 }
 #paging a:hover{
-	background-color: #89aFa3;
+	background-color: #DC7B83;
 }
 .des{
 	margin: 0 15px;
@@ -125,5 +129,5 @@ td[colspan="2"]{
 }
 .content a:hover{
 	text-decoration: underline;
-	color: #E2C547;
+	color: #CC6B73;
 }

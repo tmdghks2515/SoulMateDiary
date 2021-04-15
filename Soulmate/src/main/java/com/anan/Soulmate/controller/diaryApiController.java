@@ -181,7 +181,7 @@ public class diaryApiController {
 		User principal = principalDetails.getUser();
 		Soulmate soulmate = soulmateRepository.findByUser1(principal);
 		if(soulmate == null)
-			soulmate = soulmateRepository.findByUser1(principal);
+			soulmate = soulmateRepository.findByUser2(principal);
 		
 		// 해당 soulmate 의 anniversary entity 리스트 JsonObject에 담아주기
 		List<Anniversary> anniList = anniversaryRepository.findByYearAndMonth(anniYear, anniMonth, soulmate.getId());

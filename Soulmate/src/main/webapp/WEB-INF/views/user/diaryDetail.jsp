@@ -68,7 +68,14 @@
 					<a href="/user/diaryDetail?id=${diary.id }&page=${cmtListPage.pageable.pageNumber-1}" class="icon-angle-left dis mg"></a>
 				</c:if>
  				<c:forEach var="i"  begin="1" end="${cmtListPage.totalPages}">
-					<a href="/user/diaryDetail?id=${diary.id }&page=${i-1}" class="page_i">${i}</a>
+ 					<c:choose>
+ 					<c:when test="${i==cmtListPage.pageable.pageNumber+1}">
+						<a class="page_i current">${i}</a>
+ 					</c:when>
+ 					<c:otherwise>
+						<a href="/user/diaryDetail?id=${diary.id }&page=${i-1}" class="page_i">${i}</a>
+ 					</c:otherwise>
+ 					</c:choose>
 				</c:forEach> 
 				<c:if test="${!cmtListPage.last }">
 					<a href="/user/diaryDetail?id=${diary.id }&page=${cmtListPage.pageable.pageNumber+1}" class="icon-angle-right dis mg"></a>

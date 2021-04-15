@@ -1,14 +1,14 @@
 @charset "UTF-8";
 body{
 	text-align: center;
-	background-color: rgba(50,50,255,0.2);
+	background-color: #FFBED5;
 }
 input{
 	padding: 0.5em;
 	outline: none;
 	margin: 5px;
-	border-radius: 30px;
-	border: 2px solid  #28d4d8;
+	border-radius: 5px;
+	border: 2px solid #e8e8e8;
 }
 input:first-child{
 	margin-top: 80px;
@@ -16,12 +16,12 @@ input:first-child{
 a{
 	text-decoration: none;
 	color: white;
-	background-color: #28d4d8;
+	background-color: #9F4348;
 	padding: 0.3em;
 	margin-top: 10px;
 	display: inline-block;
 	border-radius: 5px;
 }
 a:hover{
-	background-color: #18c4c8;
+	background-color: #aF5358;
 }

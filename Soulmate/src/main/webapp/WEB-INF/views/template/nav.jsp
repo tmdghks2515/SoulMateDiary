@@ -14,7 +14,7 @@
 			<c:choose>
 				<c:when test="${empty requestScope.soulmate}">
 					<div id="single">
-						${principal.user.name } 님 !<br> 아직 소울메이트가 없습니다.<br> <a href="#">소울메이트 연결하기</a>
+						${principal.user.name } 님 !<br> 연결된 소울메이트가 없습니다.<br> <a href="#">소울메이트 연결하기</a>
 					</div>
 				</c:when>
 				<c:when test="${!empty  requestScope.soulmate}">

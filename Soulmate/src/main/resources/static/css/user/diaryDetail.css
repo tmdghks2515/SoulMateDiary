@@ -14,12 +14,12 @@
 	padding: 8px;
 	width: 600px;
 	border: 1px solid #CDD1CC;
-	outline-color: #E2C547;
+	outline-color: #CC6B73;
 }
 #writeComment a{
 	display: inline-block;
 	margin-left: -45px;
-	color: #E2C547;
+	color: #CC6B73;
 	cursor: pointer;
 }
 #writeComment a:hover{
@@ -36,7 +36,7 @@
 	margin-right: 10px;
 }
 .yellow{
-	color: #E2C547;
+	color: #CC6B73;
 }
 .cmt{
 	border-bottom: 1px solid #d8d8d8;
@@ -62,4 +62,8 @@
 }
 .mg{
 	margin:10px;
+}
+.current{
+	background-color:gray !important;
+	cursor: default; 
 }

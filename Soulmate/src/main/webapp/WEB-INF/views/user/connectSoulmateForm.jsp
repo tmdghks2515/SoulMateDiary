@@ -14,7 +14,7 @@
 			<input type="text" placeholder="소울메이트 이름" name="name"><br>
 			<input type="text" placeholder="소울메이트 이메일" name="email"><br>
 			<input type="date" placeholder="만난날짜" name="Dday"><br>
-			<a href="#">연결하기😆</a>
+			<a href="#" >연결하기😆</a>
 		</form>
 	</div>
 	<script src="/lib/jquery-3.5.1.js"></script>
